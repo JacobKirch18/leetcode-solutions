@@ -21,7 +21,7 @@
 //1 <= n <= 100
 //        -100 <= gain[i] <= 100
 
-public class Solution {
+public class FindTheHighestAltitude {
 
     public int largestAltitude(int[] gain) {
         int highestAltitude = 0;
