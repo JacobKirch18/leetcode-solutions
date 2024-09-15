@@ -60,7 +60,6 @@ class FizzBuzzMultithreaded {
                 }
                 else {
                     wait();
-                    continue;
                 }
             }
         }
@@ -77,7 +76,6 @@ class FizzBuzzMultithreaded {
                 }
                 else {
                     wait();
-                    continue;
                 }
             }
         }
@@ -94,7 +92,6 @@ class FizzBuzzMultithreaded {
                 }
                 else {
                     wait();
-                    continue;
                 }
             }
         }
@@ -104,6 +101,7 @@ class FizzBuzzMultithreaded {
     public void number(IntConsumer printNumber) throws InterruptedException {
         synchronized(this) {
             while (count <= n) {
+                // use this block for improved memory (beats 95% runtime and 60% memory)
                 if  (count % 3 == 0 || count % 5 == 0) {
                     wait();
                     continue;
@@ -111,6 +109,18 @@ class FizzBuzzMultithreaded {
                 printNumber.accept(count);
                 count++;
                 notifyAll();
+
+                // use this block for improved runtime (beats 100% and 27% memory)
+                /*
+                if  (count % 3 == 0 || count % 5 == 0) {
+                    wait();
+                }
+                else {
+                    printNumber.accept(count);
+                    count++;
+                    notifyAll();
+                }
+                */
             }
         }
     }
